@@ -1,0 +1,30 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+:root {
+    --bg1-color: #FFE8E8;
+    --bg2-color: #FFDCDC;
+    --bg3-color: #FFB4B4;
+    --bg4-color: #FF9292;
+    --TextMenuAdmin-color: Black;
+}
+
+/* Set padding to keep content from hitting the edges */
+.container-fluid {
+    padding: 0px !important;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

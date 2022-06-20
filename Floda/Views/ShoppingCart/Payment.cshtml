@@ -1,0 +1,94 @@
+﻿@model Floda.Models.Cart
+
+@{
+    ViewBag.Title = "Payment";
+    var u = Session["user"] as Floda.Models.KhachHang;
+}
+
+<head>
+    <style>
+        .payment {
+            color: white;
+            background-color: black;
+            border-radius: 0px;
+            height: 45px;
+            width: 200px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        #buttonBuyNow {
+            color: white;
+            border-radius: 0px;
+            background: transparent;
+            font-size: 15px;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function paymentAlert() {
+            if (window.confirm("Thanh toán thành công <3")) {
+                window.location = "/";
+            }
+
+        }
+    </script>
+</head>
+@using (Html.BeginForm("CreateOrder", "ShoppingCart"))
+{
+    <div class=" container-fluid">
+        <h2 style="text-align: center">PAYMENT CONFIRM</h2>
+        <hr />
+
+        <div class="container-fluid row px-1 justify-content-md-center">
+
+            <!-- khách -->
+            <div class="col-sm-3 mx-2" style="border: .2px solid; ">
+                <div class="container ">
+                    @if (u != null)
+                    {
+                        <div class="col-sm-4 col-md-0 visually-hidden">
+                            id
+                            @u.TenKH
+
+                        </div>
+                        <div class="col-sm-4 col-md-0">
+                            email
+                            @u.DienThoai
+                        </div>
+
+                        <div class="col-sm-4 col-md-0">
+                            dienthoai
+                            @u.DiaChi
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+            <!-- san pham-->
+            <div class=" col-sm-8 px-1" style="border: .2px solid; ">
+                @foreach (var item in Model.Items.ToList())
+                {
+                    double tongtien = Convert.ToDouble(item.shoppingSanpham.GiaBan * item.shoppingSoluong);
+                    <div class="row" style="margin: 15px 15px">
+                        <div class="col-md-3">
+                            <img src="@Url.Content(@item.shoppingSanpham.UrlHinhAnh.ToString())" alt="ảnh lỗi rồi" style="width:100px" />
+                        </div>
+                        <div class="col-md-8 row justify-content-md-center">
+                            <p class="col">@item.shoppingSanpham.TenSP</p>
+                            <p class="col">Số lượng: @item.shoppingSoluong</p>
+                            <p class="col">Thành tiền: @tongtien.ToString("#,##0") VNĐ</p>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <h4 style="text-align: right">Tổng tiền : @Model.TotalPrice().ToString("#,##0") VNĐ</h4>
+            </div>
+
+        </div> <!-- end row-->
+        <hr />
+        <input type="submit" value="Đặt hàng" onclick="paymentAlert()" class="btn btn-light" />
+
+    </div> <!--container-fluid-->
+}

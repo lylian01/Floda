@@ -1,0 +1,67 @@
+﻿@using System.Globalization;
+@using PagedList.Mvc
+@model PagedList.IPagedList<Floda.Models.SanPham>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewBag.Title = "Danh mục hoa cưới  / Trang " + CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Data/CSS/Index.css" rel="stylesheet" />
+
+}
+
+
+<div class="row pt-4 pb-4">
+    <div class="col-sm-3">
+        <div class="col-sm-7 " style="float: right;">
+            <ul class="list-group" style="border: 1px solid #FF4747; border-radius: 7px 7px 0px 0px;">
+                <li style="background-color: var(--bg4-color); padding: 8px; border-radius: 7px 7px 0px 0px; border-bottom: 1px solid #FF4747;"><h5 style="color: white;">Danh mục sản phẩm</h5></li>
+
+                <li class="list-group-item" style="background-color: var(--bg4-color); "><a style="color: white;" href="~/Home/HoaCuoi">Hoa cưới </a></li>
+                <li class="list-group-item"><a style="color: var(--bg4-color);" href="~/Home/HoaTotNghiep">Hoa tốt nghiệp</a></li>
+                <li class="list-group-item"><a style="color: var(--bg4-color);" href="~/Home/HoaChucMung">Hoa chúc mừng</a></li>
+                <li class="list-group-item"><a style="color: var(--bg4-color);" href="~/Home/HoaKhaiTruong">Hoa khai trương</a></li>
+
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <br />
+            @foreach (var item in Model)
+            {
+                <br />
+                <div class=" col-sm-3">
+                    <img class="card-img-top" src="@Url.Content(item.UrlHinhAnh)" style="height: 300px; width: 100%;" />
+
+                    <div class="card-body">
+                        <h5 class="card-title"> @Html.ActionLink(item.TenSP, "Index", "ProductDetail", new { id = item.SanPhamID }, null) </h5>
+                        <p class="card-text"> @item.GiaBan.Value.ToString("#,##0") VNĐ </p>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+    @if (Model.PageCount != 1)
+    {
+        <div>
+            <div class="pagination" style="width: 100% ;">
+                <div class="row">
+                    <div class="col-sm-3" style="">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+                    <div class="col-sm-6" style="text-align: center;">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+    </div>
+
+

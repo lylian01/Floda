@@ -1,0 +1,92 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<Floda.Models.NhapHang>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewBag.Title = "Danh sách phiếu nhập hàng  / Trang " + CurrentPage;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+
+}
+<style>
+    body {
+        overflow: auto;
+    }
+
+    div.container {
+        font-size: 14px;
+    }
+
+    div.container-fluid.namecreate > div:first-child {
+        float: left;
+    }
+
+    div.container-fluid.namecreate > div:last-child {
+        float: right;
+    }
+</style>
+
+<div class="container">
+    <div class="container-fluid namecreate">
+        <div>
+            <h2>Nhập hàng</h2>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary ">
+                <a href="/NhapHangs/Create" style="color: white;"> + Thêm phiếu nhập hàng </a>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid ">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr class="row">
+                        <th class="col"> Mã phiếu nhập hàng</th>
+                        <th class="col">  Ngày nhập   </th>
+                        <th class="col">  Tổng tiền chi </th>
+                        <th class="col">  Nội dung  </th>
+                        <th class="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    
+                        @foreach (var item in Model)
+                        {
+                            <tr class="row">
+                             
+                                <td class="col"> @Html.DisplayFor(modelItem => item.NhapHangID) </td>
+                                <td class="col"> @Html.DisplayFor(modelItem => item.NgayNhap) </td>
+                                <td class="col"> @item.TongTienChi.ToString("#,##0") VNĐ </td>
+                                <td class="col"> @Html.DisplayFor(modelItem => item.NoiDung) </td>
+                                
+                                <td class="col">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.NhapHangID }, new { @class = "btn btn-primary edit-btn" })
+
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.NhapHangID }, new { @class = "btn btn-danger delete-btn" })
+                                </td>
+                            </tr>
+                        }
+                    
+                </tbody>
+            </table>
+            @if (Model.PageCount != 1)
+            {
+                <div>
+                    <div class="pagination" style="width: 100% ;">
+                        <div class="row">
+                            <div class="col-sm-3" style="">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+                            <div class="col-sm-6" style="text-align: center;">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>  <!-- /bg-content-->
+    </div>
+
+</div>

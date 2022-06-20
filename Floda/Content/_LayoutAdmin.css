@@ -1,0 +1,137 @@
+﻿body {
+    background-color: var(--bg2-color);
+}
+
+a {
+    text-decoration: none;
+}
+/*menu*/
+div.menulap.col-sm-2.flex-shrink-0.p-3 {
+    min-height: 742px;
+    display: inline-block;
+    background-color: var(--bg3-color);
+    color: var(--TextMenuAdmin-color);
+    padding: 0px !important;
+}
+
+div#quanly-collapse, div#baocao-collapse, div#taikhoan-collapse {
+    background-color: var(--bg4-color);
+    margin: 0px;
+    padding: 4px 0px 8px 32px !important;
+}
+
+a.link-dark.rounded {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+    a.link-dark.rounded:hover {
+        color: var(--bg2-color);
+        cursor: pointer;
+    }
+/*button*/
+li.mb-1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+    li.mb-1 > button {
+        text-align: left;
+        margin: 0px;
+        padding: 6px 0px 6px 23px;
+    }
+
+        li.mb-1 > button:hover {
+            cursor: pointer;
+            background-color: var(--bg4-color);
+        }
+
+        li.mb-1 > button:focus {
+            box-shadow: none;
+        }
+
+        li.mb-1 > button > i {
+            padding: 6px 16px 6px 16px;
+            float: right;
+            text-align: center;
+        }
+
+/*body*/
+
+div.col-sm-10.bodymain {
+    padding: 0px;
+    margin: 0px;
+    --bs-gutter-x: 0px !important;
+}
+/*div tren*/
+li.nav-item {
+    margin: 0px 32px 0px 8px;
+}
+
+    li.nav-item > a {
+        color: var(--bg3-color);
+    }
+
+div.col-sm-10.bodymain > div:first-child {
+    height: 71px;
+    line-height: 71px;
+    padding-right: 32px;
+    align-items: center;
+    background-color: white;
+    padding: 32px;
+}
+/*div duoi*/
+
+div.col-sm-10.bodymain > div:last-child {
+    text-align: left;
+}
+
+    div.col-sm-10.bodymain > div:last-child > div {
+        padding: 32px;
+        border-radius: 7px;
+        background-color: white;
+        min-height: 580px;
+        height: max-content;
+    }
+
+/* button */
+.edit-btn {
+    background-color: var(--bg4-color);
+    border: none;
+    width: 80px;
+}
+
+    .edit-btn > a {
+        color: white;
+    }
+
+.delete-btn {
+    width: 80px;
+    border: none;
+}
+
+    .delete-btn > a {
+        color: white;
+    }
+
+.back-btn {
+    width: 130px;
+    background-color: var(--bg3-color);
+    border: none;
+    color: white;
+}
+
+    .back-btn > a {
+        color: white;
+    }
+
+.cre-btn {
+    background-color: var(--bg4-color);
+    width: 280px;
+    color: white;
+}
+
+    .cre-btn > a {
+        color: white;
+    }

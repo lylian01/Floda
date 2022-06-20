@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/Layout.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @{
+        var u = Session["user"] as Floda.Models.KhachHang;
+    }
+    <div class="container-fluid headertop text-center">
+        <div class="row headertop px-4">
+            <div class="col-sm-3">
+                <img src="~/Image/logo_text.png" style="width: 150px; float: left;" />
+            </div>
+            <div class=" col-sm-6 justify-content-center">
+                <ul class="nav">
+                    <li class="nav-item active">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: black;" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sản phẩm</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="~/Home/HoaCuoi">Hoa cưới</a></li>
+                            <li><a class="dropdown-item" href="~/Home/HoaTotNghiep">Hoa tốt nghiệp</a></li>
+                            <li><a class="dropdown-item" href="~/Home/HoaChucMung">Hoa chúc mừng</a></li>
+                            <li><a class="dropdown-item" href="~/Home/HoaKhaiTruong">Hoa khai trương</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                </ul>
+            </div>
+            <div class="col-sm-3 ">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item"><a href="~/Home/Search">       <i class="fa fa-1x fa-search" aria-hidden="true"></i>     </a> </li>
+                    <li class="nav-item">
+                        <a href="~/ShoppingCart/ShowToCart">
+                            <i class="fa fa-1x fa-shopping-cart" aria-hidden="true">
+                                @Html.Action("BagCart", "ShoppingCart")
+                            </i>
+                        </a>
+                    </li>
+                    @{
+                        if (Session["user"] == null)
+                        {
+                            <li class="nav-item"><a href="~/User/DangNhap">       <i class="fa fa-1x fa-sign-in" aria-hidden="true"></i>     </a> </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a href="~/User/DangXuat">     <i class="fa fa-1x fa fa fa-sign-out" aria-hidden="true"></i>   </a></li>
+                        }
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+
+
+    </div>
+    <footer class="container-fluid">
+        <div class="row px-4 ">
+            <div class="col-sm-3">
+                <div>
+                    <ul class="footer_category">
+                        <li>
+                            <img src="~/Image/logo_white.png" style="height: 330px;" />
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div>
+                    <ul class="footer_category">
+                        <li>
+                            <hr />
+                            <h5>Giới thiệu </h5>
+                            <hr />
+                        </li>
+                        <li class="nav-link" href="https://hoasaigon.vn/ve-hoa-sai-gon">Về chúng tôi                    </li>
+                        <li class="nav-link" href="https://hoasaigon.com.vn/gioi-thieu/cac-dich-vu-cung-cap/">Các dịch vụ cung cấp                    </li>
+                        <li class="nav-link" href="https://hoasaigon.com.vn/hoa-tuoi/" target="_blank">Blog hoa                    </li>
+                        <li class="nav-link" href="https://hoasaigon.com.vn/lien-he/" target="_blank">Liên hệ                    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div>
+                    <ul class="footer_category">
+                        <li>
+                            <hr />
+                            <h5>Hướng dẫn - Hỗ Trợ</h5>
+                            <hr />
+                        </li>
+                        <li class="nav-link" href="#">Hướng dẫn đặt hàng                    </li>
+                        <li class="nav-link" href="#">Hình thức thanh toán                    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div>
+                    <ul class="footer_category">
+                        <li>
+                            <hr />
+                            <h5>Chính sách </h5>
+                            <hr />
+                        </li>
+                        <li class="nav-link" href="#">Chính sách giao hàng                    </li>
+                        <li class="nav-link" href="#">Chính sách bảo mật                    </li>
+                        <li class="nav-link" href="#">
+                            Phí giao hàng
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <div class="col-sm-12" style="background: #1F341E; color: white; text-align: center; ">
+        &#64; 2022 Copyright: FlodaShop
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
