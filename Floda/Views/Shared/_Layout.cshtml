@@ -29,7 +29,7 @@
                             <li><a class="dropdown-item" href="~/Home/HoaKhaiTruong">Hoa khai trương</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("Giới thiệu", "About", "Home", new {@class="active"})</li>
                     <li class="nav-item">@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
                 </ul>
             </div>
@@ -38,9 +38,8 @@
                     <li class="nav-item"><a href="~/Home/Search">       <i class="fa fa-1x fa-search" aria-hidden="true"></i>     </a> </li>
                     <li class="nav-item">
                         <a href="~/ShoppingCart/ShowToCart">
-                            <i class="fa fa-1x fa-shopping-cart" aria-hidden="true">
-                                @Html.Action("BagCart", "ShoppingCart")
-                            </i>
+                            <i class="fa fa-1x fa-shopping-cart" aria-hidden="true"> </i>
+                            @Html.Action("BagCart", "ShoppingCart")
                         </a>
                     </li>
                     @{

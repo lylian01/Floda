@@ -1,43 +1,56 @@
-﻿@model Floda.Models.KhachHang
-
-@{
-    ViewBag.Title = "Dangnhap";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    Layout = null;
 }
+<!DOCTYPE html>
 
-<h2>Hãy đăng nhập để sử dụng đầy đủ tính năng của Website</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng nhập</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="~/Content/Login.css">
 
-@using(Html.BeginForm("Dangnhap", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+</head>
+<body>
 
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
+   
+    <div class="sidenav">
+        <div class="login-main-text">
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "Password", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
+    <div class="main">
+        <img class="img-logo" style="width:370px; height:150px" src="~/Image/logo_text.png" />
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form action="/User/Dangnhap" method="post">
+                    <input name="__RequestVerificationToken" type="hidden" value="DPHn_n77xExIp8vPwAwLb8TLyoUm7z4i4P2Jfzu5UcVj47HR7fh6BhiiC5qTh5M60KUk3ekH62oRSmoic8YV2bKzYJkw02J9BUqjfVJaGJg1" />    <div class="form-horizontal">
+                        <hr />
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Đăng nhập" class="btn btn-default" />
+                        <div class="form-group">
+                            <label style=" max-width: none; " class="control-label col-md-2" for="userMail">Tên tài khoản</label>
+                            <div class="col-md-10">
+                                <input class="form-control col-sm-12" id="userMail" name="userMail" type="text" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="userMail" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style=" max-width: none; " class="control-label col-md-2" for="password">Mật khẩu</label>
+                            <div class="col-md-10">
+                                <input class="form-control col-sm-12" id="password" name="password" type="Password" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="password" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" name="button" class="btn btn-black col-sm-12">Đăng nhập </button>
+                        <button class="btn btn-black col-sm-12"><a href="~/User/Dangky">Đăng ký</a> </button>
+
+                </form>
             </div>
         </div>
     </div>
-}
-@ViewBag.Fail
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>
