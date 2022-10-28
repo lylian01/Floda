@@ -53,6 +53,7 @@ namespace Floda.Controllers
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 8;
+
             var IsSanPhams = db.SanPhams.AsNoTracking()
                     .OrderByDescending(x => x.SanPhamID).Where(x => x.LoaiSPID == 2).ToList();
             PagedList<SanPham> models = new PagedList<SanPham>(IsSanPhams, pageNumber, pageSize);

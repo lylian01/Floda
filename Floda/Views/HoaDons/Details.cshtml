@@ -1,9 +1,115 @@
 ﻿@model Floda.Models.HoaDon
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<div>
+    <h4>Details</h4>
+    <hr />
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-sm-2">
+                <h6> Mã hóa đơn</h6>
+            </div>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.HoaDonID)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <h6>  Khách hàng </h6>
+            </div>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.KhachHang.TenKH)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <h6> Ngày đặt </h6>
+            </div>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.Ngay)
+            </div>
+        </div>
+       
+        <br />
+
+        <!-- Chi tiết -->
+        <div class="container row">
+            <div class="container-fluid namecreate">
+                <div style="float: left; ">
+                    <h6>Chi tiết hóa đơn</h6>
+                </div>
+                <div style=" float : right;">
+                    <button class="btn btn-md  ">
+                        @Html.ActionLink("+ Thêm chi tiết hóa đơn ", "Create", "ChiTietHoaDons", new { id = Model.HoaDonID, nhapHangcc = Model.HoaDonID }, null)
+                    </button>
+                </div>
+            </div> <!--end title-->
+            <br />
+
+            <div class="container" style="padding: 24px; border: 1px solid black;">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr class="row">
+                                <th class="col">
+                                    Mã phiếu nhập chi tiết
+                                </th>
+                                <th class="col">
+                                    Tên hàng
+                                </th>
+                                <th class="col">
+                                    Số lượng nhập
+                                </th>
+                                <th class="col">
+                                    Giá hàng
+                                </th>
+                                <th class="col">
+                                    Thành tiền
+                                </th>
+                                <th class="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.ChiTietHoaDons)
+                                {
+                                    <tr class="row">
+                                        <td class="col"> @Html.ActionLink(item.NhapHangChiTietID, "Edit", "NhapHangs", new { id = item.NhapHangChiTietID, nhapHangcc = item.NhapHangChiTietID }, null) </td>
+                                        <td class="col"> @Html.DisplayFor(modelItem => item.Hang.TenHang) </td>
+                                        <td class="col"> @Html.DisplayFor(modelItem => item.SoLuongNhap)</td>
+                                        <td class="col"> @item.Hang.GiaHang.Value.ToString("#,##0") VNĐ  </td>
+                                        <td class="col"> @thanhtien.ToString("#,##0") VNĐ</td>
+                                        <td class="col">
+                                            @Html.ActionLink("Delete", "Delete", "NhapHangChiTiets", new { id = item.NhapHangChiTietID, nhapHangcc = item.NhapHangChiTietID }, null)
+                                        </td>
+                                    </tr>
+                                    
+                                }
+
+                                <tr class="row ">
+                                    <td class="col-sm-8" style="text-align: right; border-top:1px;">Tổng tiền là : </td>
+                                    <td class="col-sm-2" style="text-align: center;"> @Html.DisplayFor(model => model.TongTien.ToString("#,##0" + "VNĐ") </td>
+                                    <td class="col-sm-2"></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!--end table-->
+
+        </div>
+    </div>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NhapHangID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
 
 <h2>Details</h2>
 

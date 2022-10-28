@@ -69,7 +69,6 @@ namespace Floda.Controllers
 
             try 
             {
-                
                 HoaDon hoaDon = new HoaDon();
 
                 hoaDon.Ngay = DateTime.Now;
@@ -92,16 +91,12 @@ namespace Floda.Controllers
                     db.SaveChanges();
                 }
 
-                db.SaveChanges();
-
+                    db.SaveChanges();
                     cart.RemoveAll();
                     return RedirectToAction("Done", "ShoppingCart");
-                
-                
             }
             catch 
             {
-                
                 return RedirectToAction("Payment", "ShoppingCart");
             }
 

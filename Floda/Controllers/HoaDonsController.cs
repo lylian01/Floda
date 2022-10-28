@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Floda.DAL;
 using Floda.Models;
+using PagedList;
 
 namespace Floda.Controllers
 {
@@ -16,16 +17,25 @@ namespace Floda.Controllers
         private FlodaContext db = new FlodaContext();
 
         // GET: HoaDons
-        public ActionResult Index()
+      
+        public ActionResult Index(int? page)
         {
             if (Session["user"] == null)
             {
                 return RedirectToAction("DangNhap", "User");
             }
-            var hoaDons = db.HoaDons.Include(h => h.KhachHang);
-            return View(hoaDons.ToList());
-        }
 
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 8;
+            var IsNhapHangs = db.HoaDons.AsNoTracking()
+                   .OrderByDescending(x => x.HoaDonID)
+                   .Include(h => h.KhachHang);
+            PagedList<HoaDon> models = new PagedList<HoaDon>(IsNhapHangs, pageNumber, pageSize);
+            ViewBag.CurrentPage = pageNumber;
+
+
+            return View(models);
+        }
         // GET: HoaDons/Details/5
         public ActionResult Details(int? id)
         {

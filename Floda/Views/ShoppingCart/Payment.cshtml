@@ -17,12 +17,14 @@
             margin-left: 10px;
         }
 
+       
         #buttonBuyNow {
-            color: white;
+            color: black;
             border-radius: 0px;
             background: transparent;
-            font-size: 15px;
-            text-decoration: none;
+            border: solid 2px;
+            font-weight: bold;
+            font-size: 20px;
         }
     </style>
     <script>
@@ -36,38 +38,38 @@
 </head>
 @using (Html.BeginForm("CreateOrder", "ShoppingCart"))
 {
-    <div class=" container-fluid">
-        <h2 style="text-align: center">PAYMENT CONFIRM</h2>
+    <div class=" container p-2">
+        <h2 style="text-align: center;color: #1F341E">Thông tin đặt hàng </h2>
         <hr />
 
         <div class="container-fluid row px-1 justify-content-md-center">
 
             <!-- khách -->
+
             <div class="col-sm-3 mx-2" style="border: .2px solid; ">
-                <div class="container ">
+                <div class="container row pt-2">
                     @if (u != null)
                     {
-                        <div class="col-sm-4 col-md-0 visually-hidden">
-                            id
-                            @u.TenKH
-
+                        <div class="row">
+                            <div class="col">Tên:</div>
+                            <div class="col">  @u.TenKH</div>
                         </div>
-                        <div class="col-sm-4 col-md-0">
-                            email
-                            @u.DienThoai
+                        <div class="row">
+                            <div class="col">Điện thoại :</div>
+                            <div class="col">  @u.DienThoai</div>
                         </div>
-
-                        <div class="col-sm-4 col-md-0">
-                            dienthoai
-                            @u.DiaChi
+                        <div class="row">
+                            <div class="col">Địa chỉ :</div>
+                            <div class="col">  @u.DiaChi</div>
                         </div>
+                        
 
                     }
                 </div>
             </div>
 
             <!-- san pham-->
-            <div class=" col-sm-8 px-1" style="border: .2px solid; ">
+            <div class=" col-sm-8 " style="border: .2px solid; ">
                 @foreach (var item in Model.Items.ToList())
                 {
                     double tongtien = Convert.ToDouble(item.shoppingSanpham.GiaBan * item.shoppingSoluong);
@@ -77,8 +79,8 @@
                         </div>
                         <div class="col-md-8 row justify-content-md-center">
                             <p class="col">@item.shoppingSanpham.TenSP</p>
-                            <p class="col">Số lượng: @item.shoppingSoluong</p>
-                            <p class="col">Thành tiền: @tongtien.ToString("#,##0") VNĐ</p>
+                            <p class="col"> @item.shoppingSoluong</p>
+                            <p class="col"> @tongtien.ToString("#,##0") VNĐ</p>
                         </div>
                     </div>
                     <hr />
@@ -88,7 +90,10 @@
 
         </div> <!-- end row-->
         <hr />
-        <input type="submit" value="Đặt hàng" onclick="paymentAlert()" class="btn btn-light" />
+        <div class="purchase" style="text-align: right">
+            <input id="buttonBuyNow" type="submit" value="Đặt hàng" onclick="paymentAlert()" class="btn btn-light" />
+        </div>
+            
 
-    </div> <!--container-fluid-->
+        </div> <!--container-fluid-->
 }

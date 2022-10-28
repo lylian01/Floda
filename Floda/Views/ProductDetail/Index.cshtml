@@ -12,12 +12,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
+
 <div class="px-5">
     <nav aria-label="breadcrumb" class="px-2 pl-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
-            
-@*            <li class="breadcrumb-item">@Model.LoaiSanPham.TenLoaiSP</li>*@
+            @*<li class="breadcrumb-item">@Model.LoaiSanPham.TenLoaiSP</li>*@
             <li class="breadcrumb-item active" aria-current="page">@Model.TenSP</li>
         </ol>
     </nav>
@@ -26,7 +26,7 @@
 
         <!--CHi tiet SP-->
 
-        <div class="col-sm-4" style="height: 500px;text-align: center;" ">
+        <div class="col-sm-4" style="height: 500px;text-align: center; ">
 
             <div class="product-images" data-columns="4">
                 <img src="@Url.Content(Model.UrlHinhAnh)" class="card-img-top" alt="@Model.TenSP" height=350px width=350px>
@@ -53,9 +53,9 @@
 
                         <form class="cart" action="#" method="post" enctype='multipart/form-data'>
                             <div class="button-add">
-                                <input onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" type='button' value='-' class="add" />
-                                <input id='quantity' min='1' name='quantity' type='text' value='1' />
-                                <input onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' class="add" />
+                                <input style="width: 40px;" onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" type='button' value='-' class="add" />
+                                <input id='quantity' min='1' name='quantity' type='text' value='1' style="width: 100px;" />
+                                <input style="width: 40px;" onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' class="add" />
                             </div>
                         </form>@*
                             <a href="/Cart/Index"><button id="btn" class="btn-buy btn1" style="background-color: #ff9292;margin:30px auto;">Thêm vào giỏ hàng</button></a>*@

@@ -17,12 +17,12 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container px-2">
 
         @if (Model.Items.Count() != 0)
         {
             <a href="/"><i title="back" class="fa-solid fa-arrow-left-long" style="color: black; margin-top: 75px; font-size: 30px"></i></a>
-            <h1 style="margin-bottom: 0px; margin-bottom: 15px">Your cart</h1>
+            <h2 style="color: #1F341E; margin-bottom: 0px; margin-bottom: 15px">Giỏ hàng của bạn.</h2>
 
 
             <table class="table col-sm-9" style="border: .1px solid #BDBDBD">
@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model.Items)
+                    @foreach (var item in Model.Items)
                     {
                         double tongtien = Convert.ToDouble(item.shoppingSanpham.GiaBan * item.shoppingSoluong);
                         <tr>
@@ -76,21 +76,31 @@
                 </tfoot>
             </table>
             <div class="purchase" style="text-align: right">
+                <a href="/Home/Index" id="buttonBuyNow" class="btn btn-primary btn-sm active" type="button" aria-pressed="true">
+                    < Mua thêm
+                </a>
+
                 <a href="/ShoppingCart/Payment" id="buttonBuyNow" class="btn btn-primary btn-sm active" type="button" aria-pressed="true">
                     Thanh toán
                 </a>
             </div>
+
+            <br />
         }
         else
         {
-            <div class="container">
-                <img src="~/image/empty-cart.png" style="margin-left: 368px; width: 30%; margin-top:65px" />
-                <h4 style="margin-top: 0px;margin-bottom: 0px; text-align: center; font-weight: bold">
-                    Giỏ hàng của bạn hiện đang trống 
-                </h4>
+            <div class="container-fluid" style="text-align: center;">
+                <br />
+                <h2>Giỏ hàng của bạn hiện đang trống</h2>
+                <br />
+                <img src="https://img.freepik.com/free-vector/removing-goods-from-basket-refusing-purchase-changing-decision-item-deletion-emptying-trash-online-shopping-app-laptop-user-cartoon-character_335657-2566.jpg?t=st=1655772385~exp=1655772985~hmac=9254177d1d62511e3e31e138f648f390aa859aecb75f7dbaddd9a1f5a10aacb0&w=740" style=" width: 30%; " />
+                <br />
+                <br />
                 <h5 style="text-align: center">
-                    Hãy mua thêm gì đó nhé.<a href="/" style="color: black">MUA THÊM </a> 
+                    Hãy mua thêm gì đó nhé .  <a href="/" style="color: limegreen">MUA THÊM </a>
+
                 </h5>
+                <br />
             </div>
         }
     </div>

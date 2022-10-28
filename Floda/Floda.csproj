@@ -273,7 +273,6 @@
     <Content Include="Views\LoaiSanPhams\Index.cshtml" />
     <Content Include="Views\SanPhams\Create.cshtml" />
     <Content Include="Views\SanPhams\Delete.cshtml" />
-    <Content Include="Views\SanPhams\Details.cshtml" />
     <Content Include="Views\SanPhams\Edit.cshtml" />
     <Content Include="Views\SanPhams\Index.cshtml" />
     <Content Include="Views\KhachHangs\Create.cshtml" />
@@ -306,7 +305,6 @@
     <Content Include="Views\ShoppingCart\Payment.cshtml" />
     <Content Include="Views\ShoppingCart\NullCart.cshtml" />
     <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
-    <Content Include="Views\ProductDetail\Details.cshtml" />
     <Content Include="Views\ProductDetail\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Done.cshtml" />
   </ItemGroup>

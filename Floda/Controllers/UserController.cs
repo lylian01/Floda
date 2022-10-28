@@ -63,7 +63,7 @@ namespace Floda.Controllers
                    
                     Session["user"] = islogin;
                    
-                    return RedirectToAction("Index", "SanPhams");
+                    return RedirectToAction("Index", "NhapHangs");
                 }
                 else
                 {
