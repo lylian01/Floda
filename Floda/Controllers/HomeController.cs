@@ -35,7 +35,7 @@ namespace Floda.Controllers
             return View(db.SanPhams.ToList());
         }
 
-        public ActionResult HoaCuoi(int? page)
+        public ActionResult Nhan(int? page)
         {
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 8;
@@ -44,9 +44,7 @@ namespace Floda.Controllers
             PagedList<SanPham> models = new PagedList<SanPham>(IsSanPhams, pageNumber, pageSize);
             ViewBag.CurrentPage = pageNumber;
 
-
             return View(models);
-
 
         }
         public ActionResult HoaChucMung(int? page)

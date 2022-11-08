@@ -81,7 +81,7 @@
                                         <td class="col"> @Html.DisplayFor(modelItem => item.Hang.TenHang) </td>
                                         <td class="col"> @Html.DisplayFor(modelItem => item.SoLuongNhap)</td>
                                         <td class="col"> @item.Hang.GiaHang.Value.ToString("#,##0") VNĐ  </td>
-                                        <td class="col"> @thanhtien.ToString("#,##0") VNĐ</td>
+                                        <td class="col"> @item.thanhtien.ToString("#,##0") VNĐ</td>
                                         <td class="col">
                                             @Html.ActionLink("Delete", "Delete", "NhapHangChiTiets", new { id = item.NhapHangChiTietID, nhapHangcc = item.NhapHangChiTietID }, null)
                                         </td>
