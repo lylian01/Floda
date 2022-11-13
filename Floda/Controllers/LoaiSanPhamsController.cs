@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Floda.DAL;
+using Floda.DesignPartern;
 using Floda.Models;
 using PagedList;
 
@@ -66,8 +67,8 @@ namespace Floda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.LoaiSanPhams.Add(loaiSanPham);
-                db.SaveChanges();
+                FlowerCategorySingleton flowerCategorySingleton = FlowerCategorySingleton.GetInstance();
+                flowerCategorySingleton.AddCategotyFlower(loaiSanPham);
                 return RedirectToAction("Index");
             }
 
@@ -98,8 +99,8 @@ namespace Floda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(loaiSanPham).State = EntityState.Modified;
-                db.SaveChanges();
+                FlowerCategorySingleton flowerCategorySingleton = FlowerCategorySingleton.GetInstance();
+                flowerCategorySingleton.EditCategotyFlower(loaiSanPham);
                 return RedirectToAction("Index");
             }
             return View(loaiSanPham);
@@ -125,9 +126,8 @@ namespace Floda.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LoaiSanPham loaiSanPham = db.LoaiSanPhams.Find(id);
-            db.LoaiSanPhams.Remove(loaiSanPham);
-            db.SaveChanges();
+            FlowerCategorySingleton flowerCategorySingleton = FlowerCategorySingleton.GetInstance();
+            flowerCategorySingleton.RemoveCategotyFlower(id);          
             return RedirectToAction("Index");
         }
 
