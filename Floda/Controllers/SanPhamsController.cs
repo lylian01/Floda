@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Floda.DAL;
+using Floda.DesignPartern;
+using Floda.DesignPartern.ProductsProxyParttern;
 using Floda.Models;
 using PagedList;
 
@@ -66,8 +68,8 @@ namespace Floda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SanPhams.Add(sanPham);
-                db.SaveChanges();
+                Product product = new ProductProxyParttern(sanPham);
+                product.AddProduct();
                 return RedirectToAction("Index");
             }
 
@@ -100,8 +102,10 @@ namespace Floda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sanPham).State = EntityState.Modified;
-                db.SaveChanges();
+                Product product = new ProductProxyParttern(sanPham);
+                product.AddProduct();
+                //db.Entry(sanPham).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.LoaiSPID = new SelectList(db.LoaiSanPhams, "LoaiSPID", "TenLoaiSP", sanPham.LoaiSPID);
@@ -128,9 +132,13 @@ namespace Floda.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                Product productDelete = new ProductProxyParttern(id);
+                productDelete.DeleteProduct();
+                //db.SanPhams.Remove(sanPham);
+                //db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
