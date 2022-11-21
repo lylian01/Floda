@@ -7,9 +7,12 @@
 
 <h2>Chỉnh sửa</h2>
 
-
 @using (Html.BeginForm())
+//using (Html.BeginForm("MyAction","SanPhams", FormMethod.Post))
+
 {
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -69,18 +72,22 @@
         <br />
 
         <div class="form-group row">
-            <div class="col-sm-3  mx-3">
-                <input type="submit" value="Save" class="btn btn-default cre-btn" />
+            <div class="col-sm-1  mx-3">
+                <input type="submit" name="submitButton" value="Redo" class="btn btn-success " />
             </div>
             |
-            <button class="btn btn-primary back-btn col-sm-3 mx-3">
-                @Html.ActionLink("Back to List", "Index")
-            </button>
+            <div class="col-sm-1  mx-3">
+                <input type="submit" name="submitButton" value="Save" class="btn btn-success " />
+            </div>
+            |
+            <div class="col-sm-1  mx-3">
+                <button class="btn btn-primary back-btn col-sm-2 mx-3">
+                    @Html.ActionLink("Back to list", "Index")
+                </button>
+            </div>
         </div>
-
-
 
     </div>  }
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval");
 }
