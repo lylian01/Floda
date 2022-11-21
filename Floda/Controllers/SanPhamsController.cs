@@ -17,7 +17,7 @@ namespace Floda.Controllers
     public class SanPhamsController : Controller
     {
         private FlodaContext db = new FlodaContext();
-
+        CareTakerForMemento careTaker = new CareTakerForMemento();
         // GET: SanPhams
         public ActionResult Index(int? page)
         {
@@ -77,6 +77,7 @@ namespace Floda.Controllers
             return View(sanPham);
         }
 
+
         // GET: SanPhams/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -96,21 +97,42 @@ namespace Floda.Controllers
         // POST: SanPhams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SanPhamID,TenSP,LoaiSPID,SoLuongSP,GiaBan,UrlHinhAnh,MoTa")] SanPham sanPham)
+        public ActionResult Edit(int? id, [Bind(Include = "SanPhamID,TenSP,LoaiSPID,SoLuongSP,GiaBan,UrlHinhAnh,MoTa")] SanPham sanPham, string submitButton)
         {
             if (ModelState.IsValid)
             {
-                Product product = new ProductProxyParttern(sanPham);
-                product.AddProduct();
-                //db.Entry(sanPham).State = EntityState.Modified;
-                //db.SaveChanges();
+                if (submitButton.ToString() == "Save")
+                {
+                    
+                    db.Entry(sanPham).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                else if (submitButton.ToString() == "Redo")
+                {
+                    //System.Diagnostics.Debug.WriteLine(careTaker.StoredProduct.SanPhamID.ToString());
+                    var memetoSession = Session["Memento"];
+                    careTaker.StoredProduct = (Memento)memetoSession;
+                    sanPham.RestoreProduct(careTaker.StoredProduct);
+                    db.Entry(sanPham).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else if(submitButton.ToString() == "SaveStage")
+                {
+                    SanPham sanPhamOlder = db.SanPhams.Find(id);
+                    careTaker.StoredProduct = sanPhamOlder.CreateStored(sanPhamOlder);
+                    careTaker.SaveMementoToSession(careTaker.StoredProduct);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.LoaiSPID = new SelectList(db.LoaiSanPhams, "LoaiSPID", "TenLoaiSP", sanPham.LoaiSPID);
             return View(sanPham);
         }
+
+
 
         // GET: SanPhams/Delete/5
         public ActionResult Delete(int? id)
