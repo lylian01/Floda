@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Floda.DAL;
 using Floda.DesignPartern;
+using Floda.DesignPartern.ProductsProxyParttern;
 using Floda.Models;
 using PagedList;
 
@@ -67,8 +68,8 @@ namespace Floda.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SanPhams.Add(sanPham);
-                db.SaveChanges();
+                Product product = new ProductProxyParttern(sanPham);
+                product.AddProduct();
                 return RedirectToAction("Index");
             }
 
@@ -93,16 +94,6 @@ namespace Floda.Controllers
             return View(sanPham);
         }
 
-        // POST: SanPhams/MyAction
-        /*        public ActionResult MyAction(string submitButton)
-                {
-                    switch (submitButton)
-                    {
-                        case "Save":
-                            return(Edit())
-                    }
-                }*/
-
         // POST: SanPhams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,12 +106,10 @@ namespace Floda.Controllers
             {
                 if (submitButton.ToString() == "Save")
                 {
-                    SanPham sanPhamOlder = db.SanPhams.Find(id);
-                    careTaker.StoredProduct = sanPhamOlder.CreateStored(sanPhamOlder);
-                    careTaker.SaveMementoToSession(careTaker.StoredProduct);
+                    
                     db.Entry(sanPham).State = EntityState.Modified;
                     db.SaveChanges();
-                    
+
                 }
                 else if (submitButton.ToString() == "Redo")
                 {
@@ -131,13 +120,19 @@ namespace Floda.Controllers
                     db.Entry(sanPham).State = EntityState.Modified;
                     db.SaveChanges();
                 }
+                else if(submitButton.ToString() == "SaveStage")
+                {
+                    SanPham sanPhamOlder = db.SanPhams.Find(id);
+                    careTaker.StoredProduct = sanPhamOlder.CreateStored(sanPhamOlder);
+                    careTaker.SaveMementoToSession(careTaker.StoredProduct);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.LoaiSPID = new SelectList(db.LoaiSanPhams, "LoaiSPID", "TenLoaiSP", sanPham.LoaiSPID);
             return View(sanPham);
         }
-        
-        
+
+
 
         // GET: SanPhams/Delete/5
         public ActionResult Delete(int? id)
@@ -159,9 +154,13 @@ namespace Floda.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                Product productDelete = new ProductProxyParttern(id);
+                productDelete.DeleteProduct();
+                //db.SanPhams.Remove(sanPham);
+                //db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
