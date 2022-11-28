@@ -8,11 +8,17 @@ namespace Floda.Models
 {
     public class LoaiSanPham
     {
-    public LoaiSanPham()
-        {   }
-    [Key]
-    public int LoaiSPID { get; set; }
-    public string TenLoaiSP { get; set; }
+        public LoaiSanPham(int loaiSPID)
+        {
+            this.LoaiSPID = loaiSPID;
+        }
+        public LoaiSanPham()
+        { }
 
-    public  ICollection<SanPham> SanPhams { get; set; }
-} }
+        [Key]
+        public int LoaiSPID { get; set; }
+        public string TenLoaiSP { get; set; }
+
+        public ICollection<SanPham> SanPhams { get; set; }
+    }
+}

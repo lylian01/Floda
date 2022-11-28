@@ -11,6 +11,7 @@ namespace Floda.Models
 {
     public class SanPham
     {
+        
         public SanPham() { }
         [Key]
         public int SanPhamID { get; set; }
@@ -40,5 +41,17 @@ namespace Floda.Models
             this.MoTa = spMemento.MoTa;
         }
         public virtual ICollection<ChiTietHoaDon> HoaDons { get; set; }
+        //Prototype Design Pattern
+        public SanPham ShallowCoppy()
+        {
+            return (SanPham)this.MemberwiseClone();
+        }
+        public SanPham DeepCopy()
+        {
+            SanPham clone = (SanPham)this.MemberwiseClone();
+            clone.LoaiSanPham = new LoaiSanPham(LoaiSanPham.LoaiSPID);
+            clone.TenSP = String.Copy(TenSP);
+            return clone;
+        }
     }
 }

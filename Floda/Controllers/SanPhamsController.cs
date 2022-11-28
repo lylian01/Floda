@@ -122,7 +122,10 @@ namespace Floda.Controllers
                 }
                 else if(submitButton.ToString() == "SaveStage")
                 {
-                    SanPham sanPhamOlder = db.SanPhams.Find(id);
+                    SanPham sp1 = new SanPham();
+                    sp1 = sanPham.ShallowCoppy();
+                    sp1 = sanPham.DeepCopy();
+                    SanPham sanPhamOlder = db.SanPhams.Find(sp1.SanPhamID);
                     careTaker.StoredProduct = sanPhamOlder.CreateStored(sanPhamOlder);
                     careTaker.SaveMementoToSession(careTaker.StoredProduct);
                 }
